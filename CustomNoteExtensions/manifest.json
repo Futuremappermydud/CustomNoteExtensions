@@ -1,0 +1,12 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
+  "id": "CustomNoteExtensions",
+  "name": "CustomNoteExtensions",
+  "author": "FutureMapper and Pink",
+  "version": "1.0.0",
+  "description": "Allows Mappers, Modders, or Anyone to create their own Custom Note Types through JSON or Code.",
+  "gameVersion": "1.29.4",
+  "dependsOn": {
+    "BSIPA": "^4.2.0"
+  }
+}
