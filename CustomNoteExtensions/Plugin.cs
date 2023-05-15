@@ -29,20 +29,8 @@ namespace CustomNoteExtensions
 			Instance = this;
 			Plugin.Log = logger;
 
-			var test = new CustomJSONNote();
-			test.noteEvent = new ModifyHealthEvent();
-			test.name = "TestNote";
-            test.color = Color.black;
-
-			var json = JsonConvert.SerializeObject(test, new JsonSerializerSettings()
-			{
-				TypeNameHandling = TypeNameHandling.Auto,
-				Formatting = Formatting.Indented,
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-			});
-			File.WriteAllText(Path.Combine(IPA.Utilities.UnityGame.InstallPath, "UserData/CustomNoteTypes/test.json"), json);
-
 			zenjector.Install<CustomNoteTypesAppInstaller>(Location.App);
+			zenjector.Install<CustomNotes.Pooling.CustomNoteNoteObjectsInstaller>(Location.Player);
 		}
 
         [Init]

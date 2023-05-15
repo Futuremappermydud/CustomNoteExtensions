@@ -8,7 +8,7 @@ namespace CustomNoteExtensions.API
 {
 	public class CustomNoteTypeRegistry
 	{
-		internal static Dictionary<string, IBasicCustomNoteType> registeredCustomNotes { get; set; }
+		internal static Dictionary<string, IBasicCustomNoteType> registeredCustomNotes { get; set; } = new Dictionary<string, IBasicCustomNoteType> ();
 
 		public static void RegisterCustomNote(string name, IBasicCustomNoteType customNote)
 		{

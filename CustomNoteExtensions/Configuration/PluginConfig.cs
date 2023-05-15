@@ -4,7 +4,7 @@ using IPA.Config.Stores;
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace CustomNoteExtensions.Configuration
 {
-    internal class PluginConfig
+    public class PluginConfig
     {
         public static PluginConfig Instance { get; set; }
         public virtual int IntValue { get; set; } = 42;
