@@ -12,7 +12,7 @@ namespace CustomNoteExtensions.API.Events
 		{
 			if(noteEvent.EventType == EventType.Hit)
 			{
-				EventUtils.Instance.gameEnergyCounter.ProcessEnergyChange(-1f);
+				EventUtils.Instance.gameEnergyCounter.ProcessEnergyChange(-EventUtils.Instance.gameEnergyCounter.energy);
 			}
 		}
 	}

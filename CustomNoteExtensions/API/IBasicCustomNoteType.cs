@@ -12,22 +12,19 @@ namespace CustomNoteExtensions.API
 {
 	public class ColorWrapper
 	{
-		[JsonIgnore]
-		public Color color;
-
-		public float r => color.r;
-		public float g => color.g;
-		public float b => color.b;
-		public float a => color.a;
+		public float r; 
+		public float g; 
+		public float b; 
+		public float a;
 
 		public static implicit operator Color(ColorWrapper instance)
 		{
-			return instance.color;
+			return new Color(instance.r, instance.g, instance.b, instance.a);
 		}
 
 		public static implicit operator ColorWrapper(Color color)
 		{
-			return new ColorWrapper { color = color };
+			return new ColorWrapper { r = color.r, g = color.g, b = color.b, a = color.a };
 		}
 	}
 	public interface IBasicCustomNoteType

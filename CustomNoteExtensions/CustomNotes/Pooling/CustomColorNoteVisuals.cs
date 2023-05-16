@@ -1,8 +1,11 @@
-﻿using System;
+﻿using CustomJSONData.CustomBeatmap;
+using CustomNoteExtensions.API;
+using System;
 using UnityEngine;
 using Zenject;
+using static BeatmapObjectSpawnMovementData;
 
-namespace CustomNoteExtensions.CustomNotes
+namespace CustomNoteExtensions.CustomNotes.Pooling
 {
     internal class CustomColorNoteVisuals : MonoBehaviour, INoteControllerDidInitEvent, INoteControllerNoteDidPassJumpThreeQuartersEvent, INoteControllerNoteDidStartDissolvingEvent
     {
@@ -62,7 +65,20 @@ namespace CustomNoteExtensions.CustomNotes
                 showArrow = true;
                 showCircle = false;
             }
-            _noteColor = _colorManager.ColorForType(noteData.colorType);
+			_noteColor = _colorManager.ColorForType(noteData.colorType);
+			if (noteData is CustomNoteData customNoteData)
+			{
+				object type;
+				if (customNoteData.customData.TryGetValue("_customNoteType", out type))
+				{
+                    if (type == null) return;
+					IBasicCustomNoteType customNoteType = null;
+					if (CustomNoteTypeRegistry.registeredCustomNotes.TryGetValue(type as string, out customNoteType))
+					{
+                        _noteColor = customNoteType.NoteColor;
+					}
+				}
+			}
             foreach (MaterialPropertyBlockController materialPropertyBlockController in _materialPropertyBlockControllers)
             {
                 materialPropertyBlockController.materialPropertyBlock.SetColor(_colorId, _noteColor.ColorWithAlpha(_defaultColorAlpha));

@@ -62,8 +62,9 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			customNoteVisuals._arrowMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_arrowMeshRenderers");
             customNoteVisuals._circleMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_circleMeshRenderers");
             customNoteVisuals._materialPropertyBlockControllers = colorNoteVisuals.GetField<MaterialPropertyBlockController[], ColorNoteVisuals>("_materialPropertyBlockControllers");
-            customNoteVisuals._noteController = colorNoteVisuals.GetField<NoteControllerBase, ColorNoteVisuals>("_noteController");
-            customNoteVisuals._defaultColorAlpha = colorNoteVisuals.GetField<float, ColorNoteVisuals>("_defaultColorAlpha");
+            customNoteVisuals._noteController = noteCon;
+
+			customNoteVisuals._defaultColorAlpha = colorNoteVisuals.GetField<float, ColorNoteVisuals>("_defaultColorAlpha");
 
 			DestroyImmediate(controller);
             DestroyImmediate(colorNoteVisuals);
