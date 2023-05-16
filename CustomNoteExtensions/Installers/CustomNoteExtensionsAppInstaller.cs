@@ -7,7 +7,7 @@ using Zenject;
 
 namespace CustomNoteExtensions.Installers
 {
-	public class CustomNoteTypesAppInstaller : Installer
+	public class CustomNoteExtensionsAppInstaller : Installer
 	{
 		public override void InstallBindings()
 		{

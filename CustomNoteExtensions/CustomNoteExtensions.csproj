@@ -72,6 +72,11 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\GameplayCore.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="Heck, Version=1.4.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Plugins\Heck.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="HMRendering, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
@@ -150,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\CustomNoteTypeRegistry.cs" />
+    <Compile Include="API\Events\EventUtils.cs" />
     <Compile Include="API\Events\ExecuteActionEvent.cs" />
     <Compile Include="API\Events\FailPlayerEvent.cs" />
     <Compile Include="API\Events\ModifyHealthEvent.cs" />
@@ -161,10 +167,12 @@
     <Compile Include="CustomNotes\Pooling\CustomNoteBeatmapObjectManager.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteDisappearingArrowController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteGameNoteController.cs" />
-    <Compile Include="CustomNotes\Pooling\CustomNoteController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteNoteObjectsInstaller.cs" />
     <Compile Include="HarmonyPatches\BasicBeatmapObjectManagerProcessNoteDataPatch.cs" />
-    <Compile Include="Installers\CustomNoteTypesAppInstaller.cs" />
+    <Compile Include="HarmonyPatches\ChromaPatch.cs" />
+    <Compile Include="HarmonyPatches\NoteVisualsPatch.cs" />
+    <Compile Include="Installers\CustomNoteExtensionsGameInstaller.cs" />
+    <Compile Include="Installers\CustomNoteExtensionsAppInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -29,8 +29,9 @@ namespace CustomNoteExtensions
 			Instance = this;
 			Plugin.Log = logger;
 
-			zenjector.Install<CustomNoteTypesAppInstaller>(Location.App);
+			zenjector.Install<CustomNoteExtensionsAppInstaller>(Location.App);
 			zenjector.Install<CustomNotes.Pooling.CustomNoteNoteObjectsInstaller>(Location.Player);
+			zenjector.Install<CustomNoteExtensionsGameInstaller>(Location.Player);
 		}
 
         [Init]

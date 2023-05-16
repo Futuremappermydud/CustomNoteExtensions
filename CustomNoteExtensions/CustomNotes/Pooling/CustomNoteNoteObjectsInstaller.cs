@@ -24,7 +24,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             cube.name = "CustomNoteGameNoteController";
             var noteCon = cube.AddComponent<CustomNoteGameNoteController>();
 
-            var controller = cube.GetComponent<GameNoteController>();
+			var controller = cube.GetComponent<GameNoteController>();
 
             var noteCube = cube.transform.Find("NoteCube");
 
@@ -51,29 +51,27 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 
             }
 
-            //DestroyImmediate(noteCube.Find("BigCuttable").gameObject);
-            //DestroyImmediate(noteCube.Find("SmallCuttable").gameObject);
             noteCon.InitializeFromOld(controller.noteMovement, controller.GetField<BoxCuttableBySaber[], GameNoteController>("_smallCuttableBySaberList"), controller.GetField<BoxCuttableBySaber[], GameNoteController>("_bigCuttableBySaberList"), controller.GetField<GameObject, GameNoteController>("_wrapperGO"), noteCube);
             foreach(NoteBigCuttableColliderSize colliderSize in noteCon.GetComponentsInChildren<NoteBigCuttableColliderSize>())
             {
                 colliderSize.SetField<NoteBigCuttableColliderSize, NoteController>("_noteController", noteCon);
             }
 
-            DestroyImmediate(controller);
-            //DestroyImmediate(cube.GetComponent<BurstSliderGameNoteController>());
-            //DestroyImmediate(cube.GetComponent<NoteJump>());
-            //DestroyImmediate(cube.GetComponent<NoteFloorMovement>());
-            //DestroyImmediate(cube.GetComponent<NoteMovement>());
+            var colorNoteVisuals = cube.GetComponent<ColorNoteVisuals>();
+			/*var customNoteVisuals = cube.AddComponent<CustomNoteVisuals>();
+			customNoteVisuals._arrowMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_arrowMeshRenderers");
+            customNoteVisuals._circleMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_circleMeshRenderers");
+            customNoteVisuals._materialPropertyBlockControllers = colorNoteVisuals.GetField<MaterialPropertyBlockController[], ColorNoteVisuals>("_materialPropertyBlockControllers");
+            customNoteVisuals._colorManager = colorNoteVisuals.GetField<ColorManager, ColorNoteVisuals>("_colorManager");*/
 
+			DestroyImmediate(controller);
+            //DestroyImmediate(colorNoteVisuals);
 
-            var noteVisuals = cube.GetComponent<ColorNoteVisuals>();
-            var baseNotevisuals = cube.GetComponent<BaseNoteVisuals>();
-            noteVisuals.SetField<ColorNoteVisuals, NoteControllerBase>("_noteController", noteCon);
-            baseNotevisuals.SetField<BaseNoteVisuals, NoteControllerBase>("_noteController", noteCon);
+			var baseNotevisuals = cube.GetComponent<BaseNoteVisuals>();
+			baseNotevisuals.SetField<BaseNoteVisuals, NoteControllerBase>("_noteController", noteCon);
+			colorNoteVisuals.SetField<ColorNoteVisuals, NoteControllerBase>("_noteController", noteCon);
 
-            baseNotevisuals.SetField<BaseNoteVisuals, NoteControllerBase>("_noteController", noteCon);
-
-            return cube;
+			return cube;
 
         }
     }

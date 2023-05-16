@@ -29,7 +29,7 @@ namespace CustomNoteExtensions.HarmonyPatches
 					IBasicCustomNoteType customNoteType = null;
 					if (CustomNoteTypeRegistry.registeredCustomNotes.TryGetValue(type as string, out customNoteType))
 					{
-						CustomNoteBeatmapObjectManager.Instance.Process(noteData, noteSpawnData, rotation, forceIsFirstNoteBehaviour);
+						CustomNoteBeatmapObjectManager.Instance.Process(noteData, noteSpawnData, rotation, forceIsFirstNoteBehaviour, customNoteType);
 						return false;
 					}
 					else
@@ -39,9 +39,6 @@ namespace CustomNoteExtensions.HarmonyPatches
 				}
 			}
 			return true;
-		}
-		public static void PoolObject(NoteData data)
-		{
 		}
 	}
 }

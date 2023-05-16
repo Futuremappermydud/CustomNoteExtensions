@@ -19,9 +19,9 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             Instance = this;
         }
 
-        public void Process(NoteData noteData, in BeatmapObjectSpawnMovementData.NoteSpawnData noteSpawnData, float rotation, bool forceIsFirstNoteBehaviour)
+        public void Process(NoteData noteData, in BeatmapObjectSpawnMovementData.NoteSpawnData noteSpawnData, float rotation, bool forceIsFirstNoteBehaviour, IBasicCustomNoteType customNoteType)
         {
-			Plugin.Log.Info("x");
+
 			if (this._firstBasicNoteTime == null)
 			{
 				this._firstBasicNoteTime = new float?(noteData.time);
@@ -37,7 +37,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			{
 				flag = true;
 			}
-			Plugin.Log.Info("x2");
+
 			bool flag2 = flag;
 			NoteVisualModifierType noteVisualModifierType = NoteVisualModifierType.Normal;
 			if (this._initData.ghostNotes && !flag2)
@@ -48,8 +48,8 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			{
 				noteVisualModifierType = NoteVisualModifierType.DisappearingArrow;
 			}
-			Plugin.Log.Info("x3");
 			CustomNoteGameNoteController gameNoteController = this._CustomNoteBasicGameNotePoolContainer.Spawn();
+			gameNoteController.customNoteType = customNoteType;
 			gameNoteController.Init(noteData, rotation, noteSpawnData.moveStartPos, noteSpawnData.moveEndPos, noteSpawnData.jumpEndPos, noteSpawnData.moveDuration, noteSpawnData.jumpDuration, noteSpawnData.jumpGravity, noteVisualModifierType, this._initData.cutAngleTolerance, this._initData.notesUniformScale);
 			_beatmapObjectManager.InvokeMethod<object, BeatmapObjectManager>("AddSpawnedNoteController", gameNoteController, noteSpawnData, rotation);
 		}

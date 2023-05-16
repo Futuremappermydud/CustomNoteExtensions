@@ -11,6 +11,10 @@ namespace CustomNoteExtensions.API.Events
 		public float HealthDelta { get; set; }
 		public void OnEvent(NoteEvent noteEvent)
 		{
+			if (noteEvent.EventType == EventType.Hit)
+			{
+				EventUtils.Instance.gameEnergyCounter.ProcessEnergyChange(HealthDelta);
+			}
 		}
 	}
 }

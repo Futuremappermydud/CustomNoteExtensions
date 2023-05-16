@@ -10,7 +10,10 @@ namespace CustomNoteExtensions.API.Events
 	{
 		public void OnEvent(NoteEvent noteEvent)
 		{
-
+			if(noteEvent.EventType == EventType.Hit)
+			{
+				EventUtils.Instance.gameEnergyCounter.ProcessEnergyChange(-1f);
+			}
 		}
 	}
 }
