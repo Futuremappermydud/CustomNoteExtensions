@@ -12,7 +12,7 @@ namespace CustomNoteExtensions.Services
 	internal class NoteTypeJSONLoaderService : IInitializable
 	{
 		private const string PATH = "UserData/CustomNoteTypes/";
-		private string fullPath = Path.Combine(UnityGame.InstallPath, PATH);
+		public static string fullPath = Path.Combine(UnityGame.InstallPath, PATH);
 		private JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
 		{
 			TypeNameHandling = TypeNameHandling.Auto
@@ -23,12 +23,10 @@ namespace CustomNoteExtensions.Services
 			{
 				Directory.CreateDirectory(fullPath);
 			}
-			Console.WriteLine(fullPath);
 			var files =
 				Directory.GetFiles(fullPath, "*.json", SearchOption.AllDirectories);
 			foreach (string file in files) 
 			{
-				Console.WriteLine(file);
 				var customNote = JsonConvert.DeserializeObject<CustomJSONNote>(File.ReadAllText(file), serializerSettings);
 				CustomNoteTypeRegistry.RegisterCustomNote(customNote.Name, customNote);
 			}

@@ -30,7 +30,7 @@ namespace CustomNoteExtensions.API
 	public interface IBasicCustomNoteType
 	{
 		string Name { get; }
-		ICustomEvent CustomEvent { get; }
+		ICustomEvent[] CustomEvents { get; }
 		ColorWrapper NoteColor { get; }
 	}
 }

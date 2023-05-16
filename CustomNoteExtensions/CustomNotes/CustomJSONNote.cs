@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,12 +18,12 @@ namespace CustomNoteExtensions.CustomNotes
 	internal class CustomJSONNote : IBasicCustomNoteType
 	{
 		public string name = "JsonObject";
-		public ICustomEvent noteEvent = null;
+		public ICustomEvent[] noteEvents = new ICustomEvent[0];
 		public ColorWrapper color = Color.white;
 		public string jsonVersion => "0.1.0";
 
 		[JsonIgnore]
-		public ICustomEvent CustomEvent => noteEvent;
+		public ICustomEvent[] CustomEvents => noteEvents;
 		[JsonIgnore]
 		public string Name => name;
 		[JsonIgnore]

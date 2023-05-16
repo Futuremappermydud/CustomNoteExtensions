@@ -1,4 +1,5 @@
 ﻿using CustomNoteExtensions.API.Events;
+using CustomNoteExtensions.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace CustomNoteExtensions.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<EventUtils>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<NoteTypeAudioService>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 		}
 	}
 }

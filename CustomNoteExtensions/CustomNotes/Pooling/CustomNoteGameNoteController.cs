@@ -127,7 +127,10 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			{
 				array[i].canBeCut = false;
 			}
-			customNoteType.CustomEvent.OnEvent(new NoteEvent(noteData, EventType.Missed));
+			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
+			{
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, EventType.Missed));
+			}
 			base.SendNoteWasMissedEvent();
 		}
 
@@ -199,7 +202,10 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			{
 				array[i].canBeCut = false;
 			}
-			customNoteType.CustomEvent.OnEvent(new NoteEvent(noteData, EventType.Hit));
+			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
+			{
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, EventType.Hit));
+			}
 			base.SendNoteWasCutEvent(noteCutInfo);
 		}
 
