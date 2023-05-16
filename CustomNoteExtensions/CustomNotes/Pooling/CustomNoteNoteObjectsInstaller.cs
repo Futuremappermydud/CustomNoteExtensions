@@ -58,14 +58,15 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             }
 
             var colorNoteVisuals = cube.GetComponent<ColorNoteVisuals>();
-			/*var customNoteVisuals = cube.AddComponent<CustomNoteVisuals>();
+			var customNoteVisuals = cube.AddComponent<CustomColorNoteVisuals>();
 			customNoteVisuals._arrowMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_arrowMeshRenderers");
             customNoteVisuals._circleMeshRenderers = colorNoteVisuals.GetField<MeshRenderer[], ColorNoteVisuals>("_circleMeshRenderers");
             customNoteVisuals._materialPropertyBlockControllers = colorNoteVisuals.GetField<MaterialPropertyBlockController[], ColorNoteVisuals>("_materialPropertyBlockControllers");
-            customNoteVisuals._colorManager = colorNoteVisuals.GetField<ColorManager, ColorNoteVisuals>("_colorManager");*/
+            customNoteVisuals._noteController = colorNoteVisuals.GetField<NoteControllerBase, ColorNoteVisuals>("_noteController");
+            customNoteVisuals._defaultColorAlpha = colorNoteVisuals.GetField<float, ColorNoteVisuals>("_defaultColorAlpha");
 
 			DestroyImmediate(controller);
-            //DestroyImmediate(colorNoteVisuals);
+            DestroyImmediate(colorNoteVisuals);
 
 			var baseNotevisuals = cube.GetComponent<BaseNoteVisuals>();
 			baseNotevisuals.SetField<BaseNoteVisuals, NoteControllerBase>("_noteController", noteCon);

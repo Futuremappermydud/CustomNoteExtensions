@@ -163,14 +163,15 @@
     <Compile Include="API\Events\PlayAudioEvent.cs" />
     <Compile Include="API\IBasicCustomNoteType.cs" />
     <Compile Include="API\NoteEvent.cs" />
+    <Compile Include="CustomNotes\CustomColorNoteVisuals.cs" />
     <Compile Include="CustomNotes\CustomJSONNote.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteBeatmapObjectManager.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteDisappearingArrowController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteGameNoteController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteNoteObjectsInstaller.cs" />
     <Compile Include="HarmonyPatches\BasicBeatmapObjectManagerProcessNoteDataPatch.cs" />
-    <Compile Include="HarmonyPatches\ChromaPatch.cs" />
     <Compile Include="HarmonyPatches\NoteVisualsPatch.cs" />
+    <Compile Include="HarmonyPatches\ChromaPatch.cs" />
     <Compile Include="Installers\CustomNoteExtensionsGameInstaller.cs" />
     <Compile Include="Installers\CustomNoteExtensionsAppInstaller.cs" />
     <Compile Include="Plugin.cs" />
