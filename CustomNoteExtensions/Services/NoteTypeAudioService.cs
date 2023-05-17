@@ -20,6 +20,7 @@ namespace CustomNoteExtensions.Services
 
 		public void PlayClip(AudioClip clip)
 		{
+			audioSource.clip = clip;
 			audioSource.PlayOneShot(clip);
 		}
 	}

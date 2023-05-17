@@ -22,7 +22,7 @@ namespace CustomNoteExtensions.API.Events
 		{
 			if(noteEvent.EventType == EventType.Hit)
 			{
-				if(audioClip != null)
+				if (audioClip != null)
 					NoteTypeAudioService.Instance.PlayClip(audioClip);
 			}
 		}
@@ -37,16 +37,15 @@ namespace CustomNoteExtensions.API.Events
 		{
 			var path = Path.Combine(NoteTypeJSONLoaderService.fullPath, AudioPath);
 			AudioClip clip = null;
-			using (UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.WAV))
+			using (UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.OGGVORBIS))
 			{
 				uwr.SendWebRequest();
 
-				// wrap tasks in try/catch, otherwise it'll fail silently
 				try
 				{
 					while (!uwr.isDone) await Task.Delay(5);
 
-					if (uwr.isNetworkError || uwr.isHttpError) Debug.Log($"{uwr.error}");
+					if (uwr.isNetworkError || uwr.isHttpError) Plugin.Log.Info($"{uwr.error}");
 					else
 					{
 						clip = DownloadHandlerAudioClip.GetContent(uwr);
@@ -58,7 +57,6 @@ namespace CustomNoteExtensions.API.Events
 					audioClip = null;
 				}
 			}
-
 			audioClip = clip;
 		}
 	}

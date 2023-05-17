@@ -66,18 +66,9 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
                 showCircle = false;
             }
 			_noteColor = _colorManager.ColorForType(noteData.colorType);
-			if (noteData is CustomNoteData customNoteData)
-			{
-				object type;
-				if (customNoteData.customData.TryGetValue("_customNoteType", out type))
-				{
-                    if (type == null) return;
-					IBasicCustomNoteType customNoteType = null;
-					if (CustomNoteTypeRegistry.registeredCustomNotes.TryGetValue(type as string, out customNoteType))
-					{
-                        _noteColor = customNoteType.NoteColor;
-					}
-				}
+			if(this._noteController.customNoteType != null)
+            {
+                _noteColor = this._noteController.customNoteType.NoteColor;
 			}
             foreach (MaterialPropertyBlockController materialPropertyBlockController in _materialPropertyBlockControllers)
             {
@@ -104,7 +95,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
         public float _defaultColorAlpha = 1f;
 
 
-        public NoteControllerBase _noteController;
+        public CustomNoteGameNoteController _noteController;
 
         public MaterialPropertyBlockController[] _materialPropertyBlockControllers;
 

@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 using Zenject;
+using CustomJSONData.CustomBeatmap;
 
 namespace CustomNoteExtensions.CustomNotes.Pooling
 {
@@ -77,6 +78,15 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 
 		protected override void Awake()
 		{
+			if (noteData is CustomNoteData customNoteData)
+			{
+				object type;
+				if (customNoteData.customData.TryGetValue("_customNoteType", out type))
+				{
+					if (type == null) return;
+					CustomNoteTypeRegistry.registeredCustomNotes.TryGetValue(type as string, out customNoteType);
+				}
+			}
 			base.Awake();
 			BoxCuttableBySaber[] array = this._bigCuttableBySaberList;
 			for (int i = 0; i < array.Length; i++)
