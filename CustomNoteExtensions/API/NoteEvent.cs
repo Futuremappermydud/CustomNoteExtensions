@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomNoteExtensions.API.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,19 +7,21 @@ using System.Threading.Tasks;
 
 namespace CustomNoteExtensions.API
 {
-	public enum EventType
-	{
-		Hit,
-		Missed
-	}
 	public class NoteEvent
 	{
 		public readonly NoteData NoteData;
-		public readonly EventType EventType;
-		internal NoteEvent(NoteData noteData, EventType eventType)
+		public readonly OnEvent EventType;
+		public readonly NoteCutInfo noteCutInfo;
+		internal NoteEvent(NoteData noteData, OnEvent eventType)
 		{
 			this.EventType = eventType;
 			this.NoteData = noteData;
+		}
+		internal NoteEvent(NoteData noteData, NoteCutInfo cut, OnEvent eventType)
+		{
+			this.EventType = eventType;
+			this.NoteData = noteData;
+			this.noteCutInfo = cut;
 		}
 	}
 }

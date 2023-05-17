@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace CustomNoteExtensions.API.Events
 {
-	public class ModifyHealthEvent : ICustomEvent
+	//Load asset bundle and play an effect
+	//TODO: Implemet an effect bundle format
+	public class PlayEffectEvent : ICustomEvent
 	{
-		public float HealthDelta { get; set; }
 		public OnEvent onEvent { get; set; }
 
-		public ModifyHealthEvent(Dictionary<string, object> values)
+		public PlayEffectEvent(Dictionary<string, object> values)
 		{
 			OnEvent newEvent;
 			Enum.TryParse(values["onEvent"] as string, out newEvent);
 			onEvent = newEvent;
 		}
+
 		public void OnEvent(NoteEvent noteEvent)
 		{
-			if (noteEvent.EventType == onEvent)
+			if(noteEvent.EventType == onEvent)
 			{
-				EventUtils.Instance.gameEnergyCounter.ProcessEnergyChange(HealthDelta);
+
 			}
 		}
 	}

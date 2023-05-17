@@ -10,10 +10,14 @@ namespace CustomNoteExtensions.API.Events
 	public class ExecuteActionEvent : ICustomEvent
 	{
 		Action<NoteEvent> hitAction = null;
+		public OnEvent onEvent { get; set; }
 		public ExecuteActionEvent(Action<NoteEvent> action) { this.hitAction = action; }
 		public void OnEvent(NoteEvent noteEvent)
 		{
-			if(hitAction != null) hitAction(noteEvent);
+			if(noteEvent.EventType == onEvent)
+			{
+				if (hitAction != null) hitAction(noteEvent);
+			}	
 		}
 	}
 }

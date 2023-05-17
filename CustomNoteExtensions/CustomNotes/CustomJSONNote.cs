@@ -14,16 +14,43 @@ using UnityEngine;
 
 namespace CustomNoteExtensions.CustomNotes
 {
+	internal class SerializedEvent
+	{
+		public string Type;
+		public Dictionary<string, object> Values;
+	}
 	[Serializable]
 	internal class CustomJSONNote : IBasicCustomNoteType
 	{
 		public string name = "JsonObject";
-		public ICustomEvent[] noteEvents = new ICustomEvent[0];
+		public SerializedEvent[] noteEvents = new SerializedEvent[0];
 		public ColorWrapper color = Color.white;
 		public string jsonVersion => "0.1.0";
 
+		[OnDeserialized]
+		internal void Deserialized(StreamingContext context)
+		{
+			convertedEvents = new ICustomEvent[noteEvents.Length];
+			for (int i = 0; i < noteEvents.Length; i++)
+			{
+				var type = noteEvents[i].Type;
+				var values = noteEvents[i].Values;
+				if (CustomEventRegistry.registeredCustomEvents.ContainsKey(type))
+				{
+					ICustomEvent instance = Activator.CreateInstance(CustomEventRegistry.registeredCustomEvents[type], new object[] { values }) as ICustomEvent;
+					convertedEvents[i] = instance;
+				}
+				else
+				{
+					Plugin.Log.Error(string.Format("Missing Event Type {} Disabling Score Submission", type));
+					//TODO: Disable Score Submission
+				}
+			}
+		}
 		[JsonIgnore]
-		public ICustomEvent[] CustomEvents => noteEvents;
+		private ICustomEvent[] convertedEvents;
+		[JsonIgnore]
+		public ICustomEvent[] CustomEvents => convertedEvents;
 		[JsonIgnore]
 		public string Name => name;
 		[JsonIgnore]

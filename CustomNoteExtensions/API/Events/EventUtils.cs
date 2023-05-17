@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomNoteExtensions.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +12,14 @@ namespace CustomNoteExtensions.API.Events
 	{
 		public static EventUtils Instance;
 		public GameEnergyCounter gameEnergyCounter;
+		public LargePromptService largePromptService;
 
 		[Inject]
-		public void Initialize(GameEnergyCounter _gameEnergyCounter)
+		public void Initialize(GameEnergyCounter _gameEnergyCounter, LargePromptService _largePromptService)
 		{
 			Instance = this;
 			gameEnergyCounter = _gameEnergyCounter;
+			largePromptService = _largePromptService;
 		}
 	}
 }

@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace CustomNoteExtensions.API.Events
 {
+	public enum OnEvent
+	{
+		None,
+		GoodCut,
+		BadCut,
+		Miss,
+		Spawn
+	}
 	public interface ICustomEvent
 	{
-		void OnEvent(NoteEvent noteEvent);
+		public void OnEvent(NoteEvent noteEvent);
 	}
 }

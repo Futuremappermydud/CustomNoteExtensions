@@ -51,7 +51,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 
             }
 
-            noteCon.InitializeFromOld(controller.noteMovement, controller.GetField<BoxCuttableBySaber[], GameNoteController>("_smallCuttableBySaberList"), controller.GetField<BoxCuttableBySaber[], GameNoteController>("_bigCuttableBySaberList"), controller.GetField<GameObject, GameNoteController>("_wrapperGO"), noteCube);
+            noteCon.InitializeFromOld(controller.noteMovement, controller.GetField<BoxCuttableBySaber[], GameNoteController>("_smallCuttableBySaberList"), controller.GetField<BoxCuttableBySaber[], GameNoteController>("_bigCuttableBySaberList"), controller.GetField<GameObject, GameNoteController>("_wrapperGO"), noteCube, controller.GetField<AudioTimeSyncController, GameNoteController>("_audioTimeSyncController"));
             foreach(NoteBigCuttableColliderSize colliderSize in noteCon.GetComponentsInChildren<NoteBigCuttableColliderSize>())
             {
                 colliderSize.SetField<NoteBigCuttableColliderSize, NoteController>("_noteController", noteCon);

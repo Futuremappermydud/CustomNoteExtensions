@@ -14,16 +14,34 @@ namespace CustomNoteExtensions.API.Events
 {
 	public class PlayAudioEvent : ICustomEvent
 	{
+		public OnEvent onEvent { get; set; }
 		public string AudioPath { get; set; }
 		[JsonIgnore]
 		private AudioClip audioClip = null;
 
 		public void OnEvent(NoteEvent noteEvent)
 		{
-			if(noteEvent.EventType == EventType.Hit)
+			if(noteEvent.EventType == onEvent)
 			{
 				if (audioClip != null)
 					NoteTypeAudioService.Instance.PlayClip(audioClip);
+			}
+		}
+
+		public PlayAudioEvent(Dictionary<string, object> values)
+		{
+			OnEvent newEvent;
+			Enum.TryParse(values["onEvent"] as string, out newEvent);
+			onEvent = newEvent;
+
+			if(values.ContainsKey("audioPath"))
+			{
+				AudioPath = values["audioPath"] as string;
+				Task.Run(async () => { await LoadClip(); });
+			}
+			else
+			{
+				Plugin.Log.Warn("Audio Event contains no value named audioPath");
 			}
 		}
 

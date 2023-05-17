@@ -8,6 +8,7 @@ using System.Threading;
 using UnityEngine;
 using Zenject;
 using CustomJSONData.CustomBeatmap;
+using CustomNoteExtensions.API.Events;
 
 namespace CustomNoteExtensions.CustomNotes.Pooling
 {
@@ -47,7 +48,6 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			this._gameplayType = noteData.gameplayType;
 			this._cutAngleTolerance = cutAngleTolerance;
 			Vector3 vector = (2f - uniformScale) * Vector3.one;
-			Plugin.Log.Info("x");
 			foreach (BoxCuttableBySaber boxCuttableBySaber in this._bigCuttableBySaberList)
 			{
 				boxCuttableBySaber.transform.localScale = vector;
@@ -58,22 +58,20 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 				boxCuttableBySaber2.transform.localScale = vector;
 				boxCuttableBySaber2.canBeCut = false;
 			}
-			Plugin.Log.Info("x1");
 			bool flag = noteData.gameplayType == NoteData.GameplayType.Normal;
 			bool flag2 = noteData.gameplayType == NoteData.GameplayType.Normal;
-			Plugin.Log.Info("x2");
 			base.Init(noteData, worldRotation, moveStartPos, moveEndPos, jumpEndPos, moveDuration, jumpDuration, jumpGravity, noteData.cutDirection.RotationAngle() + noteData.cutDirectionAngleOffset, uniformScale, flag, flag2);
-			Plugin.Log.Info("x3");
 			cubeNoteControllerDidInitEvent(this);
 		}
 
-		public void InitializeFromOld(NoteMovement noteMovement, BoxCuttableBySaber[] small, BoxCuttableBySaber[] big, GameObject wrapper, Transform noteCube)
+		public void InitializeFromOld(NoteMovement noteMovement, BoxCuttableBySaber[] small, BoxCuttableBySaber[] big, GameObject wrapper, Transform noteCube, AudioTimeSyncController audioTimeSyncController)
 		{
 			_noteTransform = noteCube;
 			_noteMovement = noteMovement;
 			_smallCuttableBySaberList = small;
 			_bigCuttableBySaberList = big;
 			_wrapperGO = wrapper;
+			_audioTimeSyncController = audioTimeSyncController;
 		}
 
 		protected override void Awake()
@@ -97,6 +95,23 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			for (int i = 0; i < array.Length; i++)
 			{
 				array[i].wasCutBySaberEvent += this.HandleSmallWasCutBySaber;
+			}
+			hasInvokedSpawnEvent = false;
+		}
+
+		public new void Update()
+		{
+			base.Update();
+			if(customNoteType != null)
+			{
+				if(!hasInvokedSpawnEvent)
+				{
+					hasInvokedSpawnEvent = true;
+					for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
+					{
+						customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Spawn));
+					}
+				}
 			}
 		}
 
@@ -139,7 +154,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			}
 			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
 			{
-				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, EventType.Missed));
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Miss));
 			}
 			base.SendNoteWasMissedEvent();
 		}
@@ -212,9 +227,10 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			{
 				array[i].canBeCut = false;
 			}
+			OnEvent Event = noteCutInfo.allIsOK ? OnEvent.GoodCut : OnEvent.BadCut;
 			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
 			{
-				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, EventType.Hit));
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, noteCutInfo, Event));
 			}
 			base.SendNoteWasCutEvent(noteCutInfo);
 		}
@@ -243,6 +259,8 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			base.enabled = !pause;
 		}
 
+		bool hasInvokedSpawnEvent = false;
+
 		[SerializeField]
 		protected BoxCuttableBySaber[] _bigCuttableBySaberList;
 
@@ -253,7 +271,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 		protected GameObject _wrapperGO;
 
 		[Inject]
-		protected readonly AudioTimeSyncController _audioTimeSyncController;
+		protected AudioTimeSyncController _audioTimeSyncController;
 
 		protected NoteVisualModifierType _noteVisualModifierType;
 

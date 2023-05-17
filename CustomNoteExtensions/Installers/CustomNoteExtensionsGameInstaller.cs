@@ -15,6 +15,7 @@ namespace CustomNoteExtensions.Installers
 		{
 			Container.BindInterfacesAndSelfTo<EventUtils>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<NoteTypeAudioService>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<LargePromptService>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 		}
 	}
 }
