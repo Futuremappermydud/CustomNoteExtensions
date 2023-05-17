@@ -54,6 +54,11 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			_beatmapObjectManager.InvokeMethod<object, BeatmapObjectManager>("AddSpawnedNoteController", gameNoteController, noteSpawnData, rotation);
 		}
 
+		public void Despawn(NoteController noteController)
+		{
+			_CustomNoteBasicGameNotePoolContainer.Despawn((CustomNoteGameNoteController)noteController);
+		}
+
 		protected float? _firstBasicNoteTime;
 
 		protected BasicBeatmapObjectManager.InitData _initData;

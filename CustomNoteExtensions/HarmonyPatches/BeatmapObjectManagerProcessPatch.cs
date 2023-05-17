@@ -16,7 +16,7 @@ namespace CustomNoteExtensions.HarmonyPatches
 {
 	[HarmonyPatch(typeof(BasicBeatmapObjectManager))]
 	[HarmonyPatch(nameof(BasicBeatmapObjectManager.ProcessNoteData))]
-	public class BasicBeatmapObjectManagerProcessNoteDataPatch
+	public class BeatmapObjectManagerProcessPatch
 	{
 		public static bool Prefix(BasicBeatmapObjectManager __instance, NoteData noteData, BeatmapObjectSpawnMovementData.NoteSpawnData noteSpawnData, float rotation, bool forceIsFirstNoteBehaviour)
 		{

@@ -187,7 +187,8 @@
     <Compile Include="CustomNotes\Pooling\CustomNoteDisappearingArrowController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteGameNoteController.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteNoteObjectsInstaller.cs" />
-    <Compile Include="HarmonyPatches\BasicBeatmapObjectManagerProcessNoteDataPatch.cs" />
+    <Compile Include="HarmonyPatches\BeatmapObjectManagerProcessPatch.cs" />
+    <Compile Include="HarmonyPatches\BeatmapObjectManagerDespawnPatch.cs" />
     <Compile Include="HarmonyPatches\ChromaPatch.cs" />
     <Compile Include="Installers\CustomNoteExtensionsGameInstaller.cs" />
     <Compile Include="Installers\CustomNoteExtensionsAppInstaller.cs" />
