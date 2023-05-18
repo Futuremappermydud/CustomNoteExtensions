@@ -32,5 +32,6 @@ namespace CustomNoteExtensions.API
 		string Name { get; }
 		ICustomEvent[] CustomEvents { get; }
 		ColorWrapper NoteColor { get; }
+		bool IsGood { get; }
 	}
 }

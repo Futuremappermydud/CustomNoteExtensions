@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,13 @@ namespace CustomNoteExtensions.Services
 			audioSource = gameObject.AddComponent<AudioSource>();
 		}
 
-		public void PlayClip(AudioClip clip)
+		public void PlayClip(AudioClip clip, float delay)
 		{
-			audioSource.clip = clip;
+			StartCoroutine(PlayDelayedClip(clip, delay));
+		}
+		IEnumerator PlayDelayedClip(AudioClip clip, float delay)
+		{
+			yield return new WaitForSeconds(delay);
 			audioSource.PlayOneShot(clip);
 		}
 	}

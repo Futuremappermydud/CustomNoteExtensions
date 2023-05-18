@@ -113,7 +113,7 @@ namespace CustomNoteExtensions.Services
 			while (value < beatLength)
 			{
 				value += Time.deltaTime;
-				float mult = Mathf.Lerp(1f, 1.15f, easing(value / beatLength));
+				float mult = Mathf.Lerp(1f, 1.35f, easing(value / beatLength));
 				scaleMutliplier = Mathf.Lerp(scaleMutliplier, mult, 0.3f);
 				text.transform.localScale = Vector3.one * scaleMutliplier;
 

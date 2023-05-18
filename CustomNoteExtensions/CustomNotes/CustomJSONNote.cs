@@ -25,6 +25,7 @@ namespace CustomNoteExtensions.CustomNotes
 		public string name = "JsonObject";
 		public SerializedEvent[] noteEvents = new SerializedEvent[0];
 		public ColorWrapper color = Color.white;
+		public bool isGood = true;
 		public string jsonVersion => "0.1.0";
 
 		[OnDeserialized]
@@ -55,5 +56,7 @@ namespace CustomNoteExtensions.CustomNotes
 		public string Name => name;
 		[JsonIgnore]
 		public ColorWrapper NoteColor => color;
+
+		public bool IsGood => isGood;
 	}
 }

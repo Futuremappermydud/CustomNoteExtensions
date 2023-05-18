@@ -15,7 +15,8 @@ namespace CustomNoteExtensions.API.Events
 	public class PlayAudioEvent : ICustomEvent
 	{
 		public OnEvent onEvent { get; set; }
-		public string AudioPath { get; set; }
+		public string audioPath { get; set; }
+		public float delay { get; set; } = 0f;
 		[JsonIgnore]
 		private AudioClip audioClip = null;
 
@@ -24,7 +25,7 @@ namespace CustomNoteExtensions.API.Events
 			if(noteEvent.EventType == onEvent)
 			{
 				if (audioClip != null)
-					NoteTypeAudioService.Instance.PlayClip(audioClip);
+					NoteTypeAudioService.Instance.PlayClip(audioClip, delay);
 			}
 		}
 
@@ -36,12 +37,21 @@ namespace CustomNoteExtensions.API.Events
 
 			if(values.ContainsKey("audioPath"))
 			{
-				AudioPath = values["audioPath"] as string;
+				audioPath = values["audioPath"] as string;
 				Task.Run(async () => { await LoadClip(); });
 			}
 			else
 			{
 				Plugin.Log.Warn("Audio Event contains no value named audioPath");
+			}
+
+			if (values.ContainsKey("delay"))
+			{
+				float value;
+				if (float.TryParse(values["delay"] as string, out value))
+				{
+					delay = value;
+				}
 			}
 		}
 
@@ -53,7 +63,7 @@ namespace CustomNoteExtensions.API.Events
 
 		async Task LoadClip()
 		{
-			var path = Path.Combine(NoteTypeJSONLoaderService.fullPath, AudioPath);
+			var path = Path.Combine(NoteTypeJSONLoaderService.fullPath, audioPath);
 			AudioClip clip = null;
 			using (UnityWebRequest uwr = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.OGGVORBIS))
 			{

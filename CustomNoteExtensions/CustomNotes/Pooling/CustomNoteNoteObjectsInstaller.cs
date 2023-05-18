@@ -12,7 +12,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             var beatmapObjectsInstaller = FindObjectOfType<BeatmapObjectsInstaller>();
             var cube = GetBasicNoteObject(beatmapObjectsInstaller.GetField<GameNoteController, BeatmapObjectsInstaller>("_normalBasicNotePrefab").gameObject);
 
-            base.Container.BindMemoryPool<CustomNoteGameNoteController, CustomNoteGameNoteController.Pool>().WithId(NoteData.GameplayType.Normal).WithInitialSize(25).FromComponentInNewPrefab(cube);
+            base.Container.BindMemoryPool<CustomNoteGameNoteController, CustomNoteGameNoteController.Pool>().WithId(NoteData.GameplayType.Normal).WithInitialSize(15).FromComponentInNewPrefab(cube);
             base.Container.Bind<CustomNoteBeatmapObjectManager>().To<CustomNoteBeatmapObjectManager>().AsSingle().NonLazy();
 
         }
