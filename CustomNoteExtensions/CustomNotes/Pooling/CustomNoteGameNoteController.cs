@@ -111,7 +111,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 					hasInvokedSpawnEvent = true;
 					for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
 					{
-						customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Spawn));
+						customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Spawn, gameObject));
 					}
 				}
 			}
@@ -156,7 +156,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			}
 			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
 			{
-				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Miss));
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, OnEvent.Miss, gameObject));
 			}
 			//This will cause 0 issues whatsoever
 			if(customNoteType.IsGood)
@@ -242,7 +242,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			OnEvent Event = noteCutInfo.allIsOK ? OnEvent.GoodCut : OnEvent.BadCut;
 			for (int i = 0; i < customNoteType.CustomEvents.Length; i++)
 			{
-				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, noteCutInfo, Event));
+				customNoteType.CustomEvents[i].OnEvent(new NoteEvent(noteData, noteCutInfo, Event, gameObject));
 			}
 
 			if (customNoteType.IsGood)

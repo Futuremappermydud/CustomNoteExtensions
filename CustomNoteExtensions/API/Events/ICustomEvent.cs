@@ -12,7 +12,8 @@ namespace CustomNoteExtensions.API.Events
 		GoodCut,
 		BadCut,
 		Miss,
-		Spawn
+		Spawn,
+		Update
 	}
 	public interface ICustomEvent
 	{

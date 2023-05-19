@@ -36,6 +36,7 @@ namespace CustomNoteExtensions.CustomNotes
 			{
 				var type = noteEvents[i].Type;
 				var values = noteEvents[i].Values;
+				values.Add("CustomNote", this);
 				if (CustomEventRegistry.registeredCustomEvents.ContainsKey(type))
 				{
 					ICustomEvent instance = Activator.CreateInstance(CustomEventRegistry.registeredCustomEvents[type], new object[] { values }) as ICustomEvent;

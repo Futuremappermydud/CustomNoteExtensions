@@ -17,6 +17,7 @@ namespace CustomNoteExtensions.Installers
 			CustomEventRegistry.RegisterCustomEvent<ModifyHealthEvent>("CustomNoteExtensions.ModifyHealthEvent");
 			CustomEventRegistry.RegisterCustomEvent<PlayEffectEvent>("CustomNoteExtensions.PlayEffectEvent");
 			CustomEventRegistry.RegisterCustomEvent<DisplayPromptEvent>("CustomNoteExtensions.DisplayPromptEvent");
+			Container.BindInterfacesAndSelfTo<Services.NoteTypeBundleLoaderService>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<Services.NoteTypeJSONLoaderService>().AsSingle().NonLazy();
 		}
 	}

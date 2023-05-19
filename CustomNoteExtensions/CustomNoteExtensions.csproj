@@ -57,6 +57,11 @@
       <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="BS_Utils, Version=1.12.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Plugins\BS_Utils.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="CameraUtils, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Plugins\CameraUtils.dll</HintPath>
@@ -122,6 +127,11 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
@@ -169,7 +179,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Animation\Path.cs" />
     <Compile Include="API\CustomNoteTypeRegistry.cs" />
+    <Compile Include="API\Events\AnimateColorEvent.cs" />
     <Compile Include="API\Events\CustomNoteTypeRegistry.cs" />
     <Compile Include="API\Events\DisplayPromptEvent.cs" />
     <Compile Include="API\Events\EventUtils.cs" />
@@ -181,6 +193,7 @@
     <Compile Include="API\Events\PlayEffectEvent.cs" />
     <Compile Include="API\IBasicCustomNoteType.cs" />
     <Compile Include="API\NoteEvent.cs" />
+    <Compile Include="Effects\Effect.cs" />
     <Compile Include="CustomNotes\Pooling\CustomColorNoteVisuals.cs" />
     <Compile Include="CustomNotes\CustomJSONNote.cs" />
     <Compile Include="CustomNotes\Pooling\CustomNoteBeatmapObjectManager.cs" />
@@ -197,6 +210,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\LargePromptService.cs" />
     <Compile Include="Services\NoteTypeAudioService.cs" />
+    <Compile Include="Services\NoteTypeBundleLoaderService.cs" />
     <Compile Include="Services\NoteTypeJSONLoaderService.cs" />
   </ItemGroup>
   <ItemGroup>

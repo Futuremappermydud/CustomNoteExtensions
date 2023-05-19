@@ -27,9 +27,16 @@ namespace CustomNoteExtensions
 			zenjector.Install<CustomNoteExtensionsAppInstaller>(Location.App);
 			zenjector.Install<CustomNotes.Pooling.CustomNoteNoteObjectsInstaller>(Location.Player);
 			zenjector.Install<CustomNoteExtensionsGameInstaller>(Location.Player);
+
+			BS_Utils.Utilities.BSEvents.levelSelected += LevelSelected;
 		}
 
-        [Init]
+		private void LevelSelected(LevelCollectionViewController levelCollectionView, IPreviewBeatmapLevel previewBeatmapLevel)
+		{
+            //Register Custom Notes here
+		}
+
+		[Init]
         public void InitWithConfig(Config conf)
         {
             Configuration.PluginConfig.Instance = conf.Generated<Configuration.PluginConfig>();
