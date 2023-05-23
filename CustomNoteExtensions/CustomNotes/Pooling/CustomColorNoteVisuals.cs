@@ -52,6 +52,24 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             }
         }
 
+        public void Update()
+        {
+			if (this._noteController.customNoteType != null)
+			{
+                var newColor = this._noteController.customNoteType.NoteColor;
+
+                if (newColor != _noteColor)
+                {
+                    _noteColor = newColor;
+                    foreach (MaterialPropertyBlockController materialPropertyBlockController in _materialPropertyBlockControllers)
+                    {
+                        materialPropertyBlockController.materialPropertyBlock.SetColor(_colorId, _noteColor.ColorWithAlpha(_defaultColorAlpha));
+                        materialPropertyBlockController.ApplyChanges();
+                    }
+                }
+			}
+		}
+
         public virtual void HandleNoteControllerDidInit(NoteControllerBase noteController)
         {
             NoteData noteData = _noteController.noteData;
@@ -75,6 +93,8 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
                 materialPropertyBlockController.materialPropertyBlock.SetColor(_colorId, _noteColor.ColorWithAlpha(_defaultColorAlpha));
                 materialPropertyBlockController.ApplyChanges();
             }
+
+            //_noteController.customNoteType;
 
             if(didInitEvent != null) didInitEvent(this, _noteController);
 

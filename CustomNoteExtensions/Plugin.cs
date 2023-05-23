@@ -7,6 +7,8 @@ using IPALogger = IPA.Logging.Logger;
 using HarmonyLib;
 using SiraUtil.Zenject;
 using CustomNoteExtensions.Installers;
+using System.Collections.Generic;
+using CustomNoteExtensions.CustomNotes;
 
 namespace CustomNoteExtensions
 {
@@ -34,6 +36,20 @@ namespace CustomNoteExtensions
 		private void LevelSelected(LevelCollectionViewController levelCollectionView, IPreviewBeatmapLevel previewBeatmapLevel)
 		{
             //Register Custom Notes here
+            if(previewBeatmapLevel is CustomJSONData.CustomBeatmap.CustomBeatmapSaveData customPreview)
+            {
+                var customData = customPreview.customData;
+
+				if (customData.ContainsKey("_customNoteTypes"))
+                {
+                    var notes = customData.Get<List<CustomJSONNote>>("_customNoteTypes");
+                    for (int i = 0; i < notes.Count; i++)
+                    {
+                        Log.Info(notes[i].name);
+                        Log.Info(notes[i].noteEvents.Length.ToString());
+					}
+				}
+            }
 		}
 
 		[Init]

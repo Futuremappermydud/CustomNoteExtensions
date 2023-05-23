@@ -74,8 +74,18 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			_bigCuttableBySaberList = big;
 			_wrapperGO = wrapper;
 			_audioTimeSyncController = audioTimeSyncController;
+
+			
 		}
 
+		private void UpdateFromJump(float T)
+		{
+			float newT = T * 2f;
+			for (int i = 0; i < customNoteType.Properties.Length; i++)
+			{
+				customNoteType.Properties[i].SetT(newT);
+			}
+		}
 		protected override void Awake()
 		{
 			if (noteData is CustomNoteData customNoteData)
@@ -99,6 +109,8 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 				array[i].wasCutBySaberEvent += HandleSmallWasCutBySaber;
 			}
 			hasInvokedSpawnEvent = false;
+
+			GetComponent<NoteJump>().noteJumpDidUpdateProgressEvent += UpdateFromJump;
 		}
 
 		public new void Update()
@@ -140,6 +152,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 					}
 				}
 			}
+			GetComponent<NoteJump>().noteJumpDidUpdateProgressEvent -= UpdateFromJump;
 		}
 
 		protected override void NoteDidPassMissedMarker()

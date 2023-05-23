@@ -15,7 +15,6 @@ namespace CustomNoteExtensions.API.Events
 		Local
 	}
 	//Load asset bundle and play an effect
-	//TODO: Implemet an effect bundle format
 	//Some JSON Properties: Global or local(to note) positioning, rotation, scaling, animation(heck integration?), shader colors(other shader fields too?)
 	public class PlayEffectEvent : ICustomEvent
 	{

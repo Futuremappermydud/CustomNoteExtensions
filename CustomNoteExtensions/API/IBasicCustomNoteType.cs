@@ -1,4 +1,5 @@
-﻿using CustomNoteExtensions.API.Events;
+﻿using CustomNoteExtensions.API.Animation;
+using CustomNoteExtensions.API.Events;
 using IPA.Config.Stores.Converters;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ namespace CustomNoteExtensions.API
 {
 	public class ColorWrapper
 	{
+		public string property;
 		public float r; 
 		public float g; 
 		public float b; 
@@ -33,5 +35,6 @@ namespace CustomNoteExtensions.API
 		ICustomEvent[] CustomEvents { get; }
 		ColorWrapper NoteColor { get; }
 		bool IsGood { get; }
+		Property<object>[] Properties { get; }
 	}
 }

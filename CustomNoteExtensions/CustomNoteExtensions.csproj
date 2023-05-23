@@ -179,9 +179,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="API\Animation\Path.cs" />
+    <Compile Include="API\Animation\LerpFunction.cs" />
+    <Compile Include="API\Animation\Property.cs" />
     <Compile Include="API\CustomNoteTypeRegistry.cs" />
-    <Compile Include="API\Events\AnimateColorEvent.cs" />
     <Compile Include="API\Events\CustomNoteTypeRegistry.cs" />
     <Compile Include="API\Events\DisplayPromptEvent.cs" />
     <Compile Include="API\Events\EventUtils.cs" />

@@ -22,7 +22,7 @@ namespace CustomNoteExtensions.HarmonyPatches
 				if (customNoteData.customData.TryGetValue("_customNoteType", out type))
 				{
 					if (type == null) return true;
-					IBasicCustomNoteType customNoteType = null;
+					IBasicCustomNoteType customNoteType;
 					if (CustomNoteTypeRegistry.registeredCustomNotes.TryGetValue(type as string, out customNoteType))
 					{
 						CustomNoteBeatmapObjectManager.Instance.Despawn(noteController);

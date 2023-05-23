@@ -52,7 +52,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
             }
 
             noteCon.InitializeFromOld(controller.noteMovement, controller.GetField<BoxCuttableBySaber[], GameNoteController>("_smallCuttableBySaberList"), controller.GetField<BoxCuttableBySaber[], GameNoteController>("_bigCuttableBySaberList"), controller.GetField<GameObject, GameNoteController>("_wrapperGO"), noteCube, controller.GetField<AudioTimeSyncController, GameNoteController>("_audioTimeSyncController"));
-            foreach(NoteBigCuttableColliderSize colliderSize in noteCon.GetComponentsInChildren<NoteBigCuttableColliderSize>())
+            foreach(var colliderSize in noteCon.GetComponentsInChildren<NoteBigCuttableColliderSize>())
             {
                 colliderSize.SetField<NoteBigCuttableColliderSize, NoteController>("_noteController", noteCon);
             }
@@ -67,7 +67,7 @@ namespace CustomNoteExtensions.CustomNotes.Pooling
 			customNoteVisuals._defaultColorAlpha = colorNoteVisuals.GetField<float, ColorNoteVisuals>("_defaultColorAlpha");
 
 			DestroyImmediate(controller);
-            DestroyImmediate(colorNoteVisuals);
+			DestroyImmediate(colorNoteVisuals);
 
 			var baseNotevisuals = cube.GetComponent<BaseNoteVisuals>();
 			baseNotevisuals.SetField<BaseNoteVisuals, NoteControllerBase>("_noteController", noteCon);
